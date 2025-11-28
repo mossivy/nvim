@@ -67,3 +67,15 @@ vim.g.vimtex_view_method = 'skim'
 -- Optional: Enable forward search when compiling
 vim.g.vimtex_view_skim_sync = 1
 vim.g.vimtex_view_skim_activate = 1
+
+
+-- Load lecture manager
+local lecture = require('lecture_manager')
+
+-- Keymappings for lecture management (avoid conflict with VimTeX)
+vim.keymap.set('n', '<leader>Ln', lecture.new_lecture, { buffer = true, desc = 'New lecture' })
+vim.keymap.set('n', '<leader>Lc', lecture.compile_master, { buffer = true, desc = 'Compile master' })
+vim.keymap.set('n', '<leader>La', lecture.include_all_lectures, { buffer = true, desc = 'Include all lectures' })
+vim.keymap.set('n', '<leader>Ll', lecture.include_last_n_lectures, { buffer = true, desc = 'Include last N lectures' })
+vim.keymap.set('n', '<leader>Ls', lecture.list_lectures, { buffer = true, desc = 'List lectures' })
+
