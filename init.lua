@@ -1,6 +1,14 @@
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
+-- Force .tex files to be recognized as 'tex'
+vim.filetype.add {
+  extension = {
+    tex = "tex",
+  }
+}
+
+
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -22,7 +30,7 @@ require("lazy").setup({
     import = "nvchad.plugins",
   },
 
-  { import = "plugins" },
+  { import = "custom.plugins" },
 }, lazy_config)
 
 -- load theme
@@ -30,7 +38,7 @@ dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
-require "autocmds"
+require "nvchad.autocmds"
 
 vim.schedule(function()
   require "mappings"
