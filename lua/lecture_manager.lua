@@ -71,9 +71,13 @@ function M.new_lecture()
   vim.ui.input({ prompt = 'Lecture title: ' }, function(title)
     if not title then return end
     
+    -- Escape underscores in title for LaTeX
+    title = title:gsub('_', '\\_')
+    
     -- Create lecture file
     local lecture_file = string.format('%s/notes/lec_%02d.tex', course_dir, lecture_num)
-    local date = os.date('%a %d %b %H:%M')
+    -- FIXED: Use shorter date format without time
+    local date = os.date('%a %d %b')
     local content = string.format('\\lecture{%d}{%s}{%s}\n\n', lecture_num, date, title)
     
     local file = io.open(lecture_file, 'w')
@@ -116,9 +120,9 @@ function M.compile_master()
     {
       on_exit = function(_, exit_code)
         if exit_code == 0 then
-          vim.notify('Compilation successful!', vim.log.levels.INFO)
+          vim.notify('Compilation successful! PDF in build/master.pdf', vim.log.levels.INFO)
         else
-          vim.notify('Compilation failed!', vim.log.levels.ERROR)
+          vim.notify('Compilation failed! Check build/master.log', vim.log.levels.ERROR)
         end
       end
     }
