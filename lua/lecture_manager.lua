@@ -17,11 +17,23 @@ end
 
 -- Get next lecture number
 local function get_next_lecture_number(course_dir)
-  local handle = io.popen('ls -1 ' .. course_dir .. '/notes/lec_*.tex 2>/dev/null | wc -l')
-  local count = handle:read("*a")
+  local handle = io.popen('ls -1 ' .. course_dir .. '/notes/lec_*.tex 2>/dev/null | sort -V')
+  local max_num = 0
+  
+  for filename in handle:lines() do
+    local num = filename:match('lec_(%d+)%.tex')
+    if num then
+      local lecture_num = tonumber(num)
+      if lecture_num > max_num then
+        max_num = lecture_num
+      end
+    end
+  end
   handle:close()
-  return tonumber(count) + 1
+  
+  return max_num + 1
 end
+
 
 -- Update master.tex to include lectures
 local function update_master(course_dir, lecture_nums)

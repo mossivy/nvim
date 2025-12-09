@@ -20,6 +20,34 @@ endglobal
 # DOCUMENT STRUCTURE
 # ============================================================================
 
+snippet fbox "fbox" b 
+\fbox{$1}$0 
+endsnippet
+
+snippet review "tcolorbox review question" b
+\begin{tcolorbox}[reviewstyle, title={$1}]
+\textbf{My Answer:}
+
+$2
+
+\medskip
+\textbf{Ideal Answer:}
+
+$3
+
+\medskip
+\textbf{\color{red}{Where I Went Wrong:}}
+
+$4
+\end{tcolorbox}
+endsnippet
+
+
+snippet rar "reaction arrow"
+\rightarrow ${0}
+endsnippet
+
+
 snippet template "Basic template" b
 \documentclass[a4paper]{article}
 
@@ -112,7 +140,7 @@ endsnippet
 snippet ali "Align" bA
 \begin{align*}
 	${1:${VISUAL}}
-.\end{align*}
+\end{align*}
 endsnippet
 
 # ============================================================================
@@ -420,7 +448,6 @@ snippet set "set" wA
 \\{$1\\} $0
 endsnippet
 
-context "math()"
 snippet case "cases" wA
 \begin{cases}
 	$1
@@ -477,11 +504,12 @@ endsnippet
 # CHEMISTRY (using chemformula package - add your own!)
 # ============================================================================
 
-snippet ch "Chemical formula" iA
-\ch{$1}$0
+snippet chemf "Chemical formula" iA
+\chemfig{$1}$0
 endsnippet
 
-snippet chr "Chemical reaction" iA
+
+snippet chemr "Chemical reaction" iA
 \ch{$1 -> $2}$0
 endsnippet
 

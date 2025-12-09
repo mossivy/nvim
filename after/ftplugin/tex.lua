@@ -81,3 +81,6 @@ vim.keymap.set('n', '<localleader>Ls', lecture.list_lectures,
   { buffer = true, desc = 'List lectures' })
 
 
+-- Reload UltiSnips snippets with ,rs
+vim.api.nvim_set_keymap('n', ',rs', ':UltiSnipsReloadSnippets<CR>', { noremap = true, silent = true })
+
